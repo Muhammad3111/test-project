@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../context/Auth";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 type User = {
   username: string;
@@ -8,12 +10,21 @@ type User = {
 
 export default function Login() {
   const { setUser } = useAuth();
+  const navigate = useNavigate();
   const [userData, setUserData] = useState<User>({
     username: "",
     password: "",
   });
 
   const handleSubmit = () => {
+    if (userData.username && userData.password === "") {
+      toast.error("Foydalanuvchi nomi va parolni kiritishingiz shart !!!");
+    } else if (userData.username && userData.password === "Oybek") {
+      toast.success("Xush kelibsiz");
+      navigate("/");
+    } else {
+      toast.error("Foydalanuvchi nomi yoki parol xato");
+    }
     setUser(userData);
   };
   return (
