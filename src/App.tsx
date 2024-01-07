@@ -16,7 +16,7 @@ function App() {
     } else {
       toast.error("Foydalanuvchi nomi yoki Parol xato");
     }
-  }, [user]);
+  }, [user, navigate]);
   console.log(user);
   return (
     <Routes>
